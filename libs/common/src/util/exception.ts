@@ -27,7 +27,7 @@ export class RequestTimeTooSkewed extends HttpException {
   }
 }
 
-export const ParseExeption = (error: any): void => {
+export const ParseException = (error: any): void => {
   const logger = new Logger();
   const errorName = error?.code || error?.name;
 

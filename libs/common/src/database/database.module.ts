@@ -1,4 +1,4 @@
-import { Product } from '@app/common/entity';
+import { Cart, Order, OrderItem, Product } from '@app/common/entity';
 import { Module } from '@nestjs/common';
 import {
   ConfigService,
@@ -21,7 +21,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
           type: 'postgres',
           autoLoadEntities: true,
           synchronize: true,
-          entities: [Product],
+          entities: [Product, Cart, OrderItem, Order],
           logging: true,
         };
       },

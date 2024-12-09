@@ -7,6 +7,7 @@ import {
 } from '@nestjs/platform-fastify';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { SeederService } from './modules/warung/seeders/seeder.service';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -21,12 +22,6 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
   const logger = new Logger();
-
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  await app.register(require('@fastify/cookie'));
-
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  await app.register(require('@fastify/multipart'));
 
   app.setGlobalPrefix('/v1/api');
   app.enableCors({
@@ -43,6 +38,9 @@ async function bootstrap() {
 
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('docs', app, swaggerDocument);
+
+  const seederService = app.get(SeederService);
+  await seederService.seed();
 
   await app.listen(configService.get('PORT'), '0.0.0.0', (_, addr) =>
     logger.log(`Server running at ${addr}`),

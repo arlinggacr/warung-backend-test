@@ -14,17 +14,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       useFactory: async (configService: ConfigService) => {
         return {
           host: configService.get('DATABASE_HOST'),
-          port: configService.get('DATABASE_PORT'),
-          username: configService.get('DATABASE_USERNAME'),
+          port: +configService.get('DATABASE_PORT'),
+          username: configService.get('DATABASE_USER'),
           password: configService.get('DATABASE_PASSWORD'),
           database: configService.get('DATABASE_NAME'),
           type: 'postgres',
           autoLoadEntities: true,
+          synchronize: true,
           entities: [Product],
           logging: true,
-          ssl: {
-            rejectUnauthorized: false,
-          },
         };
       },
     }),

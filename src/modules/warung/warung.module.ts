@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AddProductRepository } from './repository/add-product.repository';
 import { ExploreProductRepository } from './repository/list-all-products.repository';
 // import { SeederService } from './seeders/seeder.service';
+import { DetailProductRepository } from './repository/detail-product.repository';
 import { ProductController } from './warung.controller';
 import { ProductService } from './warung.service';
 
@@ -21,6 +22,7 @@ import { ProductService } from './warung.service';
     // SeederService,
     ExploreProductRepository,
     AddProductRepository,
+    DetailProductRepository,
   ],
   controllers: [ProductController],
 })

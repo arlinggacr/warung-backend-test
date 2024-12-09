@@ -23,6 +23,13 @@ export class ProductController {
     return await this.productService.getAllProduct(listAllProductsReqDto);
   }
 
+  @Post('detail/:id')
+  @ApiOperation({ summary: 'Detail data products' })
+  async detailProduct(@Body() product_id: number): Promise<any> {
+    this.logger.log(MethodLogger.Controller(this.detailProduct.name));
+    return await this.productService.getDetailProduct(product_id);
+  }
+
   @Post('add/')
   @ApiOperation({ summary: 'Add a new product' })
   async addProduct(

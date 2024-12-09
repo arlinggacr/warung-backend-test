@@ -1,7 +1,8 @@
 import { Cart, Product } from '@app/common/entity';
+import { MethodLogger } from '@app/common/util/method-logger';
 import { Injectable, Logger } from '@nestjs/common';
 import { EntityManager } from 'typeorm';
-import { ListAllCartsRequestDto } from '../dto/list-all-cart.dto'; // Assuming you have the DTO for request
+import { ListAllCartsRequestDto } from '../dto/list-all-cart.dto';
 
 @Injectable()
 export class ExploreCartRepository {
@@ -16,7 +17,7 @@ export class ExploreCartRepository {
     page,
     size,
   }: ListAllCartsRequestDto): Promise<any> {
-    this.logger.log(`Fetching carts for cartId ${cartId}`);
+    this.logger.log(MethodLogger.Repository(this.findAllCarts.name));
 
     const queryCart = this.entityManager
       .createQueryBuilder(Cart, 'c')
